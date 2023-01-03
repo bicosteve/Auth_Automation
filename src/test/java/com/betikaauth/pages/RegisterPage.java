@@ -6,11 +6,11 @@ import org.openqa.selenium.WebDriver;
 public class RegisterPage extends BasePage{
 
 
-    private final By phoneNumber = By.xpath("");
-    private final By password = By.xpath("");
-    private final By confirmPassword = By.xpath("");
-    private final By terms = By.xpath("");
-    private final By registerButton = By.xpath("//*[text()='Register']");
+    private final By phoneNumber = By.xpath("//input[@type='text']");
+    private final By password = By.xpath("(//input[@class='input'])[2]");
+    private final By confirmPassword = By.xpath("(//input[@class='input'])[3]");
+    private final By termsCheckBox = By.xpath("//span[@class='checkmark']");
+    private final By registerButton = By.xpath("//span[text()='Register']");
 
 
 
@@ -40,9 +40,19 @@ public class RegisterPage extends BasePage{
         driver.findElement(this.confirmPassword).sendKeys(password);
     }
 
+    private void acceptTerms(){
+        driver.findElement(this.termsCheckBox).click();
+    }
+
     public void register(String phoneNumber,String password, String confirmPassword){
         addPhone(phoneNumber);
         addPassword(password);
         confirmPassword(confirmPassword);
+        acceptTerms();
+    }
+
+    public LoginPage clickRegister(){
+        driver.findElement(this.registerButton).click();
+        return new LoginPage(driver);
     }
 }
