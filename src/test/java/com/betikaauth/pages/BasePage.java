@@ -10,7 +10,7 @@ public class BasePage {
         this.driver = driver;
     }
 
-    public void loadURL(String url,String page){
-        this.driver.get(url + page);
+    public void getURL(String url){
+        this.driver.get(url);
     }
 }

@@ -5,22 +5,21 @@ import org.openqa.selenium.WebDriver;
 
 public class RegisterPage extends BasePage{
 
-
     private final By phoneNumber = By.xpath("//input[@type='text']");
     private final By password = By.xpath("(//input[@class='input'])[2]");
     private final By confirmPassword = By.xpath("(//input[@class='input'])[3]");
     private final By termsCheckBox = By.xpath("//span[@class='checkmark']");
     private final By registerButton = By.xpath("//span[text()='Register']");
-
+    private final By verificationButton = By.xpath("//span[text()='Verify and Log In']");
 
 
     public RegisterPage(WebDriver driver) {
         super(driver);
     }
 
-    public RegisterPage loadRegisterPage(){
-        driver.findElement(registerButton).click();
-        return this;
+    public void loadRegisterPage(){
+        String registerURL = "https://www.betika.com/en-ke/register?next=%2F";
+        getURL(registerURL);
     }
 
     private void addPhone(String phoneNumber){
@@ -51,8 +50,16 @@ public class RegisterPage extends BasePage{
         acceptTerms();
     }
 
-    public LoginPage clickRegister(){
+//    public VerificationPage clickRegister(){
+//        driver.findElement(this.registerButton).click();
+//        return new VerificationPage(driver);
+//    }
+
+    public void clickRegister(){
         driver.findElement(this.registerButton).click();
-        return new LoginPage(driver);
+    }
+
+    public String confirmRegister(){
+        return driver.findElement(verificationButton).getText();
     }
 }
